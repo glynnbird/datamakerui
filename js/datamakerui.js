@@ -60,7 +60,8 @@ var app = new Vue({
     message: 'Hello Vue!',
     preview: false,
     taglist: [ ],
-    csv: ''
+    csv: '',
+    loading: false
   },
   computed: {
     showgenerate: function() {
@@ -123,6 +124,7 @@ var app = new Vue({
       this.csv = ''
     },
     generate: function() {
+      this.loading = true
       let u = 'https://openwhisk.ng.bluemix.net/api/v1/web/glynnbir%40uk.ibm.com_dev/default/datamaker'
       const params = {
         header: this.taglist.map((k) => { return k.name}).join(','),
@@ -135,7 +137,7 @@ var app = new Vue({
       fetch(u + '?' + query).then((data) => {
         return data.text()
       }).then((data) => {
-        console.log(data)
+        loading = false
         this.csv = data
         this.preview = true
       })
