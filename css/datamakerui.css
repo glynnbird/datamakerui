@@ -1,0 +1,16 @@
+.main {
+  margin-top: 85px
+}
+
+pre {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.spacer {
+  margin-right: 150px
+}
+
+#csv {
+  height: 400px;
+}

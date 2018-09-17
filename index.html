@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- Project CSS -->
+    <link rel="stylesheet" href="css/datamakerui.css" >
+
+    <title>Data Maker</title>
+  </head>
+  <body>
+    <a href="https://github.com/glynnbird/datamaker"><img style="position: absolute; top: 0; right: 0; border: 0; z-index:10000" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    <div id="app">
+      <!-- navbar-->
+      <nav class="navbar fixed-top navbar-light bg-light thisnav">
+        <a class="navbar-brand" href="#">Data Maker</a>
+        <span class="navbar-text justify-content-end spacer" v-if="showgenerate && !preview">
+          <button class="btn btn-success my-2 my-sm-0" type="button" v-on:click="generate">Generate Data</button>
+        </span>
+        <span class="navbar-text justify-content-end spacer" v-if="preview">
+          <button class="btn btn-success my-2 my-sm-0" type="button" v-on:click="startAgain">Start Again</button>
+        </span>
+      </nav>
+      
+      <!-- main container -->
+      <div class="container main">
+        <div class="jumbotron" v-if="showjumbo">
+          <h1 class="display-4">Datamaker</h1>
+          <p class="lead">Generate a CSV file by choosing the type of data you wish to create.</p>
+          <hr class="my-4">
+          <p>Start from a <a href="#" v-on:click="newTemplate">new project</a> or pick one of the templates below:</p>
+          <ul>
+            <li><a href="#" v-on:click="orderTemplate">Order Template</a></li>
+            <li><a href="#" v-on:click="usersTemplate">Users Template</a></li>
+            <li><a href="#" v-on:click="businessTemplate">Businesses Template</a></li>
+          </ul>
+        </div>
+        <tag-list v-if="!preview" v-bind:taglist="taglist"></tag-list>
+       
+        <!-- preview panel -->
+        <div v-if="preview">
+          <h3>Data generation complete</h3>
+          <div>
+            The data below was generated with the <a href="https://www.npmjs.com/package/datamaker">datamaker</a> library. 
+            If you need to create more data or have more control of the range of data created, then install 
+            the tool an run it on your machine e.g. 
+            <pre v-pre>
+               echo "{{uuid}},{{date}},{{firstname}} {{surname}},{{email}}" | datamaker
+            </pre>
+            In the meantime, here's your data:<br><br>
+          </div>
+          <button class="button" id="copy-button" data-clipboard-target="#csv">Copy</button>
+          <pre id="csv">{{ csv }}</pre>
+        </div>
+
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!-- development version, includes helpful console warnings -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.4.0/clipboard.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/datamakerui.js"></script>
+  </body>
+</html>
+
+
